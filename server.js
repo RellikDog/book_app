@@ -8,7 +8,7 @@ const superagent = require('superagent');
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); //to allow for CSS to work correctly; from stack overflow
 
 app.set('view engine', 'ejs');
 
@@ -41,6 +41,7 @@ function search(req, res){
 
 //Constructor Functions
 function Book(book){
+  console.log(book)
   this.title = book.volumeInfo.title || 'Book Title does not exist';
   this.author = book.volumeInfo.authors || 'Unknown Author';
   this.description = book.volumeInfo.description;
