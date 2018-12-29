@@ -1,44 +1,44 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand|Staatliches');
 @import url(reset.css);
+@import url(layout.css);
+@import url(modules.css);
 
+*{
+  box-sizing: border-box; 
+}
 body {
   background-color: lightgray;
   font-family: Quicksand, sans-serif;
-  width: 480px;
   margin: auto;
 }
-header{
-  background-color: black;
-  color: white;
-  padding: 10px;
+
+@media only screen and (min-width: 960px) {
+  main{
+      width: 960px;
+      margin: 20px auto;
+  }
 }
-main{
-  width: 960px;
-  margin: 20px auto;
+@media only screen and (max-width: 959px) {
+  main{
+    width: 480px;
+    margin: 20px auto;
+  }
+  h3{
+    text-align: center;
+  }
 }
 
 h1{
   font-family: Staatliches, sans-serif;
   font-size: 48pt;
-  font-weight: thin;
+  font-weight: normal;
+  width: 100%;
 }
-#searchBar, .selector, button{
-  width: 384px;
-  height: 4em;
-  margin-left: 48px;
-  margin-top: 40px;
-  border-radius: 10px;
+h3{
+  font-family: Staatliches, sans-serif;
+  font-size: 16pt;
+  font-weight: normal;
 }
-.selector{
-  background-color: darkgray;
-  height: 40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-button{
-  background-color: black;
-  color: white;
-}
-.center{
-margin-top: 10px;
+h5{
+  font-style: italic;
 }
