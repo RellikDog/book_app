@@ -13,6 +13,7 @@ Basic full-stack application for a book list which will include the ability to s
 NodeJS, EJS
 
 ## Change Log
+- 12/29/18: Started lab scaffolding and search/display results. Initial styling.
 
 # Lab 11
 
@@ -28,8 +29,17 @@ NodeJS, EJS
 
 <b>Feature 03: Displaying Search Results</b>
 - Estimated time needed to complete: 1 hour
+- Start & Finish Time: 10:50am | 11:20am
+- Actual time needed to complete: 30 min
+
+<b>Feature 04: Error Handling</b>
+- Estimated time needed to complete: 30 min
 - Start & Finish Time: 
 - Actual time needed to complete: 
 
+<b>Feature 05: Style the book application</b>
+- Estimated time needed to complete: 1 hour
+- Start & Finish Time: 
+- Actual time needed to complete: 
 
 ## Credits and Collaborations

@@ -8,7 +8,7 @@ const superagent = require('superagent');
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); //to allow for CSS to work correctly; from stack overflow
 
 app.set('view engine', 'ejs');
 
@@ -33,12 +33,13 @@ function search(req, res){
   return superagent.get(url)
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
-      res.render('pages/show', {books});
+      res.render('pages/searches/show', {books});
     })
 }
 
 //Constructor Functions
 function Book(book){
+  console.log(book)
   this.title = book.volumeInfo.title || 'Book Title does not exist';
   this.placeholderImage = 'https://i.imgur.com/J5LVHEL.jpeg';
 }
