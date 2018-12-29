@@ -1,0 +1,28 @@
+{
+  "name": "book_app",
+  "version": "1.0.0",
+  "description": "lab 11&12",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RellikDog/book_app.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RellikDog/book_app/issues"
+  },
+  "homepage": "https://github.com/RellikDog/book_app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "db": "^1.1.1",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "superagent": "^4.1.0"
+  }
+}
