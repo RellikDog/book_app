@@ -6,7 +6,12 @@
 body {
   background-color: lightgray;
   font-family: Quicksand, sans-serif;
+<<<<<<< HEAD
   box-sizing: border-box;
+=======
+  width: 480px;
+  margin: auto;
+>>>>>>> 63da030eef81fcded38a073374854fed84b4f7a3
 }
 header{
   background-color: black;
@@ -21,6 +26,7 @@ h1{
   font-size: 48pt;
   font-weight: thin;
 }
+<<<<<<< HEAD
 h3{
   font-family: Staatliches, sans-serif;
   font-size: 16pt;
@@ -33,3 +39,25 @@ h4{
 h5{
   font-style: italic;
 }
+=======
+#searchBar, .selector, button{
+  width: 384px;
+  height: 4em;
+  margin-left: 48px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.selector{
+  background-color: darkgray;
+  height: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+button{
+  background-color: black;
+  color: white;
+}
+.center{
+margin-top: 10px;
+}
+>>>>>>> 63da030eef81fcded38a073374854fed84b4f7a3
