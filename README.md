@@ -42,4 +42,36 @@ NodeJS, EJS
 - Start & Finish Time: 11:35am | 12:50pm
 - Actual time needed to complete: 1 hr 15 min
 
+# Lab 12
+
+<b>Feature 01: Show all saved books when the application loads</b>
+- Estimated time needed to complete: 1 hour
+- Start & Finish Time: 1:20pm | 
+- Actual time needed to complete: 
+
+<b>Feature 02: Book Detail View</b>
+- Estimated time needed to complete: 1 hour
+- Start & Finish Time: 
+- Actual time needed to complete: 
+
+<b>Feature 03: Modifying API-provided book details</b>
+- Estimated time needed to complete: 1 hour
+- Start & Finish Time: 
+- Actual time needed to complete: 
+
+<b>Feature 04: Saving a new book to the collection</b>
+- Estimated time needed to complete: 1 hour
+- Start & Finish Time: 
+- Actual time needed to complete: 
+
+<b>Feature 05: Consistent Rendering</b>
+- Estimated time needed to complete: 1 hour
+- Start & Finish Time: 
+- Actual time needed to complete: 
+
+<b>Feature 06: Continue to style the application</b>
+- Estimated time needed to complete: 1 hour
+- Start & Finish Time: 
+- Actual time needed to complete: 
+
 ## Credits and Collaborations
