@@ -34,7 +34,9 @@ function search(req, res){
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
       res.render('pages/searches/show', {books});
-    })
+    }).catch(err => {
+      res.render('pages/error', {err});
+    });
 }
 
 //Constructor Functions
