@@ -6,5 +6,5 @@ CREATE TABLE books (
     isbn VARCHAR(255),
     image_url TEXT,
     descript TEXT, 
-    bookshelf BOOLEAN
+    bookshelf VARCHAR(255)
 );
