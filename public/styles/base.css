@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand|Staatliches');
 @import url(reset.css);
+@import url(layout.css);
+@import url(modules.css);
 
 body {
   background-color: lightgray;
   font-family: Quicksand, sans-serif;
+  box-sizing: border-box;
 }
 header{
   background-color: black;
@@ -11,12 +14,22 @@ header{
   padding: 10px;
 }
 main{
-  width: 960px;
-  margin: 20px auto;
 }
 
 h1{
   font-family: Staatliches, sans-serif;
   font-size: 48pt;
   font-weight: thin;
+}
+h3{
+  font-family: Staatliches, sans-serif;
+  font-size: 16pt;
+  font-weight: normal;
+}
+h4{
+  background-color: darkgray;
+  padding: 10px 20px;
+}
+h5{
+  font-style: italic;
 }

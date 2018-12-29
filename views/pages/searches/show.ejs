@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>[ book app ] search results</title>
+    <link rel="stylesheet" href="/styles/base.css">
 </head>
 <body>
-    results!!
-    <% books.forEach(ele => { %>
-        <img src=<%=ele.image %>>
-        <h3><%= ele.title %></h3>
-        <h5><%= ele.author %></h5>
-        <p><% ele.description %></p>
-   <% }); %>
+    <header>
+        <h1>[ book app ]</h1>
+    </header>
+    <main>
+        <h4>search results</h4>
+        <section>
+            <% books.forEach(ele => { %>
+                <li>
+                    <img src=<%= ele.image %>>
+                    <h3><%= ele.title %></h3>
+                    <h5><%= ele.author %></h5>
+                    <p><%= ele.description %></p>
+                </li>
+            <% }); %>
+        </section>
+    </main>
 </body>
 </html>

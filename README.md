@@ -39,7 +39,7 @@ NodeJS, EJS
 
 <b>Feature 05: Style the book application</b>
 - Estimated time needed to complete: 1 hour
-- Start & Finish Time: 11:30am
+- Start & Finish Time: 11:35am
 - Actual time needed to complete: 
 
 ## Credits and Collaborations

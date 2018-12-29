@@ -1,0 +1,42 @@
+
+section{
+  width: 960px;
+  margin: 20px auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+li{
+  list-style: none;
+  background-color: darkgray;
+  margin: 10px;
+  padding: 10px;
+  width: 250px;
+  border-radius: 10px;
+}
+li img{
+  object-fit: cover;
+  width: 250px;
+  height: 300px;
+}
+p{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 200px;
+  margin-top: 20px;
+}
+
+/*Scrollbar styling from w3schools*/
+p::-webkit-scrollbar {
+  width: 10px;
+}
+p::-webkit-scrollbar-track {
+  background:darkgray; 
+}
+p::-webkit-scrollbar-thumb {
+  background: #f1f1f1; 
+}
+p::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
