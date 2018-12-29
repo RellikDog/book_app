@@ -41,7 +41,9 @@ function search(req, res){
 function Book(book){
   console.log(book)
   this.title = book.volumeInfo.title || 'Book Title does not exist';
-  this.placeholderImage = 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.author = book.volumeInfo.authors || 'Unknown Author';
+  this.description = book.volumeInfo.description;
+  this.image = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
 }
 
 
