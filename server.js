@@ -3,9 +3,9 @@
 //Application Dependencies
 
 const express = require('express');
-
+const pg = require('pg');
 const superagent = require('superagent');
-
+require('dotenv').config();
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public')); //to allow for CSS to work correctly; from stack overflow
@@ -13,6 +13,13 @@ app.use(express.static(__dirname + '/public')); //to allow for CSS to work corre
 app.set('view engine', 'ejs');
 
 const PORT = process.env.PORT || 3000;
+
+//postgress setup
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
+
+
 
 app.get('/', home);
 
@@ -34,18 +41,26 @@ function search(req, res){
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
       res.render('pages/searches/show', {books});
+      console.log(books[0]);
+      let SQL = `INSERT INTO books 
+            (title, author, descript, image_url, isbn, bookshelf)
+            VALUES ($1, $2, $3, $4, $5, $6)`;
+      let values = books[0];
+      return client.query(SQL, [values.title, values.author, values.descript, values.image, values.isbn, values.bookshelf]);
     }).catch(err => {
       res.render('pages/error', {err});
     });
 }
 
 //Constructor Functions
-function Book(book){
-  console.log(book)
+function Book(book, bookshelf){
+  // console.log(book)
   this.title = book.volumeInfo.title || 'Book Title does not exist';
   this.author = book.volumeInfo.authors || 'Unknown Author';
-  this.description = book.volumeInfo.description;
+  this.descript = book.volumeInfo.description;
   this.image = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.isbn = book.volumeInfo.industryIdentifiers[0].type + ' ' + book.volumeInfo.industryIdentifiers[0].identifier;
+  this.bookshelf = bookshelf;
 }
 
 
