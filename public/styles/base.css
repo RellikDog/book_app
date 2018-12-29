@@ -3,61 +3,42 @@
 @import url(layout.css);
 @import url(modules.css);
 
+*{
+  box-sizing: border-box; 
+}
 body {
   background-color: lightgray;
   font-family: Quicksand, sans-serif;
-<<<<<<< HEAD
-  box-sizing: border-box;
-=======
-  width: 480px;
   margin: auto;
->>>>>>> 63da030eef81fcded38a073374854fed84b4f7a3
 }
-header{
-  background-color: black;
-  color: white;
-  padding: 10px;
+
+@media only screen and (min-width: 960px) {
+  main{
+      width: 960px;
+      margin: 20px auto;
+  }
 }
-main{
+@media only screen and (max-width: 959px) {
+  main{
+    width: 480px;
+    margin: 20px auto;
+  }
+  h3{
+    text-align: center;
+  }
 }
 
 h1{
   font-family: Staatliches, sans-serif;
   font-size: 48pt;
-  font-weight: thin;
+  font-weight: normal;
+  width: 100%;
 }
-<<<<<<< HEAD
 h3{
   font-family: Staatliches, sans-serif;
   font-size: 16pt;
   font-weight: normal;
 }
-h4{
-  background-color: darkgray;
-  padding: 10px 20px;
-}
 h5{
   font-style: italic;
 }
-=======
-#searchBar, .selector, button{
-  width: 384px;
-  height: 4em;
-  margin-left: 48px;
-  margin-top: 40px;
-  border-radius: 10px;
-}
-.selector{
-  background-color: darkgray;
-  height: 40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-button{
-  background-color: black;
-  color: white;
-}
-.center{
-margin-top: 10px;
-}
->>>>>>> 63da030eef81fcded38a073374854fed84b4f7a3

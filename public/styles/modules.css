@@ -1,29 +1,60 @@
+@media only screen and (min-width: 960px) {
+  section{
+    width: 960px;
+    margin: 20px auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  li{
+    list-style: none;
+    background-color: darkgray;
+    margin: 20px;
+    padding: 10px;
+    width: 250px;
+    border-radius: 10px;
+  }
+  li img{
+    object-fit: cover;
+    width: 230px;
+    height: 300px;
+  }
+  p{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 200px;
+    margin-top: 20px;
+  }
+}
 
-section{
-  width: 960px;
-  margin: 20px auto;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-li{
-  list-style: none;
-  background-color: darkgray;
-  margin: 10px;
-  padding: 10px;
-  width: 250px;
-  border-radius: 10px;
-}
-li img{
-  object-fit: cover;
-  width: 250px;
-  height: 300px;
-}
-p{
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: 200px;
-  margin-top: 20px;
+@media only screen and (max-width: 959px) {
+  section{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  li{
+    text-align: center;
+    list-style: none;
+    background-color: darkgray;
+    margin: 10px;
+    padding: 10px;
+    width: 400px;
+    border-radius: 10px;
+  }
+  li img{
+    object-fit: cover;
+    width: 300px;
+    height: 450px;
+  }
+  p{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 150px;
+    margin-top: 20px;
+    text-align: left;
+  }
 }
 
 /*Scrollbar styling from w3schools*/
@@ -40,3 +71,24 @@ p::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
 
+/*Form styling*/
+
+#searchBar, .selector, button{
+  font-family: Quicksand, sans-serif;
+  box-sizing: border-box;
+  width: 384px;
+  height: 20px;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.selector{
+  background-color: darkgray;
+  height: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+button{
+  background-color: black;
+  color: white;
+}
