@@ -34,12 +34,12 @@ NodeJS, EJS
 
 <b>Feature 04: Error Handling</b>
 - Estimated time needed to complete: 30 min
-- Start & Finish Time: 
-- Actual time needed to complete: 
+- Start & Finish Time: 11:20am | 11:28am
+- Actual time needed to complete: 10min
 
 <b>Feature 05: Style the book application</b>
 - Estimated time needed to complete: 1 hour
-- Start & Finish Time: 
+- Start & Finish Time: 11:30am
 - Actual time needed to complete: 
 
 ## Credits and Collaborations
