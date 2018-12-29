@@ -4,6 +4,8 @@
 body {
   background-color: lightgray;
   font-family: Quicksand, sans-serif;
+  width: 480px;
+  margin: auto;
 }
 header{
   background-color: black;
@@ -19,4 +21,24 @@ h1{
   font-family: Staatliches, sans-serif;
   font-size: 48pt;
   font-weight: thin;
+}
+#searchBar, .selector, button{
+  width: 384px;
+  height: 4em;
+  margin-left: 48px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.selector{
+  background-color: darkgray;
+  height: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+button{
+  background-color: black;
+  color: white;
+}
+.center{
+margin-top: 10px;
 }
