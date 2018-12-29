@@ -13,23 +13,19 @@
         <h1>[ book app ]</h1>
     </header>
     <main>
-        <h3>Search by Title or Author</h3>
-        <form action="/searches" method="post">
-            <input id="searchBar" type="text" name="search" placeholder="Enter a title or an author" required>
-            <fieldset class="selector">
-                <label for="title">
-                    <span>Title</span>
-                    <input type="radio" name="search" value="title" required>
-                </label>
-            </fieldset>
-            <fieldset class="selector">
-                <label for="author">
-                    <span>Author</span>
-                    <input type="radio" name="search" value="author" required>
-                </label>
-            </fieldset>
-            <button type="submit">Search the Google Books API</button>
-        </form>
+        <h3>My bookshelf</h3>
+        <section>
+            <% books.forEach(ele => { %>
+                <li>
+                    <img src=<%= ele.image %>>
+                    <h3><%= ele.title %></h3>
+                    <h5><%= ele.author %></h5>
+                    <p><%= ele.descript %></p>
+                </li>
+                
+            <% }); %>
+        </section>
+        
     </main>
 </body>
 </html>
