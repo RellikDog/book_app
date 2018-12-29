@@ -14,17 +14,17 @@
     <main>
         <h3>Search by Title or Author</h3>
         <form action="/searches" method="post">
-            <input type="text" name="search" placeholder="Enter a title or an author" required>
-            <fieldset>
+            <input id="searchBar" type="text" name="search" placeholder="Enter a title or an author" required>
+            <fieldset class="selector">
                 <label for="title">
-                    <span>Title</span>
-                    <input type="radio" name="search" value="title" required>
+                    <span class="center">Title</span>
+                    <input class="center" type="radio" name="search" value="title" required>
                 </label>
             </fieldset>
-            <fieldset>
+            <fieldset class="selector">
                 <label for="author">
-                    <span>Author</span>
-                    <input type="radio" name="search" value="author" required>
+                    <span class="center">Author</span>
+                    <input class="center" type="radio" name="search" value="author" required>
                 </label>
             </fieldset>
             <button type="submit">Search the Google Books API</button>
