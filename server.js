@@ -33,7 +33,7 @@ function search(req, res){
   return superagent.get(url)
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
-      res.render('pages/show', {books});
+      res.render('pages/searches/show', {books});
     })
 }
 
