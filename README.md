@@ -23,8 +23,13 @@ NodeJS, EJS
 
 <b>Feature 02: Search Google Books API</b>
 - Estimated time needed to complete: 1 hour
+- Start & Finish Time: 10:35am | 10:48am
+- Actual time needed to complete: 15 min-ish
+
+<b>Feature 03: Displaying Search Results</b>
+- Estimated time needed to complete: 1 hour
 - Start & Finish Time: 
-- Actual time needed to complete:
+- Actual time needed to complete: 
 
 
 ## Credits and Collaborations
