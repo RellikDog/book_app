@@ -46,6 +46,7 @@ function Book(book){
   this.author = book.volumeInfo.authors || 'Unknown Author';
   this.description = book.volumeInfo.description;
   this.image = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.isbn = book.volumeInfo.industryIdentifiers[0].type + ' ' + book.volumeInfo.industryIdentifiers[0].identifier;
 }
 
 
