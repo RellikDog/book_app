@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>[ book app ] search for your favorite books!</title>
+    <title>[ book app ] my bookshelf</title>
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="icon" href="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" type="image/x-icon">
 </head>
@@ -21,8 +21,12 @@
                     <h3><%= ele.title %></h3>
                     <h5><%= ele.author %></h5>
                     <p><%= ele.descript %></p>
+
+                    <form action="/books/:id" method="get">
+                        <button type="submit">View Details</button>
+                    </form>
                 </li>
-                
+            
             <% }); %>
         </section>
         
