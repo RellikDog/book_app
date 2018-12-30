@@ -42,3 +42,17 @@ h3{
 h5{
   font-style: italic;
 }
+h5 a{
+  color: lightgray;
+}
+a{
+  font-family: Staatliches, sans-serif;
+  font-size: 14pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: white
+}
+a:hover{
+  color: darkblue;
+  transition: 0.3s;
+}

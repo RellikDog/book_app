@@ -1,0 +1,9 @@
+<div id="form-bg" class="id<%= i %>"></div>
+<div id="form-popup" class="id<%= i %>">
+    <h5>Want to add to your database? <a href="#" id="close">[close window]</a></h5>
+    <form action="/books" method="post">
+        <%- include('../pages/books/detail.ejs', {book: book}) %>
+        <input id="searchBar" type="text" name="search" placeholder="Bookshelf Category" required>
+        <button type="submit">Add to Database</button>
+    </form>
+</div>

@@ -19,22 +19,20 @@ const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
-
-
+//app get
 app.get('/', home);
 app.get('/new', newSearch);
 app.get('/books/:id', detailView);
 
 app.post('/searches', search);
 
+//function calls
 function home(req, res){
   const SQL = 'SELECT * FROM books';
 
   return client.query(SQL)
     .then(data => {
-      // console.log(data.rows);
       let books = data.rows.map(book => new DBBook(book));
-      console.log(books[0]);
       res.render('pages/index', {books});
     }).catch(err => {
       console.log(err);
@@ -53,7 +51,7 @@ function detailView(req, res){
   //get bookshelves.then
   client.query(SQL, values)
     .then(data => {
-      res.render('pages/books/detail', {book: data.rows[0]});
+      res.render('pages/books/show', {book: data.rows[0]});
     }).catch(err => {
       console.log(err);
       res.render('pages/error', {err});
@@ -71,35 +69,36 @@ function search(req, res){
   return superagent.get(url)
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
-      res.render('pages/searches/show', {books});
       console.log(books[0]);
+      res.render('pages/searches/show', {books});
+
+      //placeholder values for feature 01 book setup
       let SQL = `INSERT INTO books 
             (title, author, descript, image_url, isbn, bookshelf)
             VALUES ($1, $2, $3, $4, $5, $6)`;
       let values = books[0];
-      return client.query(SQL, [values.title, values.author, values.descript, values.image, values.isbn, values.bookshelf]);
+      return client.query(SQL, [values.title, values.author, values.descript, values.image_url, values.isbn, values.bookshelf]);
     }).catch(err => {
       res.render('pages/error', {err});
     });
 }
 
 //Constructor Functions
-function DBBook(book){
-  this.title = book.title || 'Book Title does not exist';
-  this.author = book.author || 'Unknown Author';
+function DBBook(book){ //constructor for book from database
+  this.title = book.title;
+  this.author = book.author;
   this.descript = book.descript;
-  this.image = book.image_url || 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.image_url = book.image_url;
   this.isbn = book.isbn;
   this.bookshelf = book.bookshelf;
   this.id = book.id;
 }
 
-function Book(book, bookshelf){
-  console.log(book)
+function Book(book, bookshelf){ //constructor for book from API
   this.title = book.volumeInfo.title || 'Book Title does not exist';
   this.author = book.volumeInfo.authors || 'Unknown Author';
   this.descript = book.volumeInfo.description;
-  this.image = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.image_url = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
   this.isbn = book.volumeInfo.industryIdentifiers[0].type + ' ' + book.volumeInfo.industryIdentifiers[0].identifier;
   this.bookshelf = bookshelf;
 }
