@@ -50,9 +50,10 @@ function detailView(req, res){
   const SQL = `SELECT * FROM books WHERE id=$1;`;
   let values = [req.params.id];
   console.log(req)
+  //get bookshelves.then
   client.query(SQL, values)
     .then(data => {
-      res.render('pages/books/show');
+      res.render('pages/books/detail', {book: data.rows[0]});
     }).catch(err => {
       console.log(err);
       res.render('pages/error', {err});
@@ -83,7 +84,7 @@ function search(req, res){
 }
 
 //Constructor Functions
-function DBBook(book, bookshelf){
+function DBBook(book){
   this.title = book.title || 'Book Title does not exist';
   this.author = book.author || 'Unknown Author';
   this.descript = book.descript;

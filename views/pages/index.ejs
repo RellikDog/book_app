@@ -22,8 +22,7 @@
                     <h5><%= ele.author %></h5>
                     <p><%= ele.descript %></p>
 
-                    <form action="/books/:id" method="get">
-                        <button type="submit">View Details</button>
+                    <a href="/books/<%= ele.id %>">View Details</a>
                     </form>
                 </li>
             
