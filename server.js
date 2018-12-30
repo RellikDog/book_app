@@ -23,6 +23,7 @@ client.on('error', err => console.error(err));
 
 app.get('/', home);
 app.get('/new', newSearch);
+app.get('/books/:id', detailView);
 
 app.post('/searches', search);
 
@@ -43,6 +44,19 @@ function home(req, res){
 
 function newSearch(req, res){
   res.render('pages/searches/new');
+}
+
+function detailView(req, res){
+  const SQL = `SELECT * FROM books WHERE id=$1;`;
+  let values = [req.params.id];
+  console.log(req)
+  client.query(SQL, values)
+    .then(data => {
+      res.render('pages/books/show');
+    }).catch(err => {
+      console.log(err);
+      res.render('pages/error', {err});
+    });
 }
 
 function search(req, res){
@@ -70,13 +84,13 @@ function search(req, res){
 
 //Constructor Functions
 function DBBook(book, bookshelf){
-  console.log(book)
   this.title = book.title || 'Book Title does not exist';
   this.author = book.author || 'Unknown Author';
   this.descript = book.descript;
   this.image = book.image_url || 'https://i.imgur.com/J5LVHEL.jpeg';
   this.isbn = book.isbn;
   this.bookshelf = book.bookshelf;
+  this.id = book.id;
 }
 
 function Book(book, bookshelf){
