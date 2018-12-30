@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>[ book app ] search results</title>
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="icon" href="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" type="image/x-icon">
-</head>
+<%- include('../../layout/head.ejs') %>
 <body>
-    <header>
-        <h1>[ book app ]</h1>
-    </header>
+    <%- include('../../layout/header.ejs') %>
     <main>
         <h3>search results</h3>
         <section>
-            <% books.forEach(ele => { %>
+            <% for (var i in books) { %>
                 <li>
-                    <img src=<%= ele.image %>>
-                    <h3><%= ele.title %></h3>
-                    <h5><%= ele.author %></h5>
-                    <p><%= ele.descript %></p>
-
-                    <button>Save to Bookshelf</button>
+                    <%- include('../books/detail.ejs', {book: books[i]}) %>
+                    <button type="button" id="id<%= i %>">add to db</button>
                 </li>
-                
-            <% }); %>
+
+                <%- include('../../layout/add.ejs', {book: books[i], i: i}) %>
+            <% }; %>
         </section>
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
