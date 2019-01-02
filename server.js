@@ -25,6 +25,7 @@ app.get('/new', newSearch);
 app.get('/books/:id', detailView);
 
 app.post('/searches', search);
+app.post('/books', addBook)
 
 //function calls
 function home(req, res){
@@ -47,7 +48,7 @@ function newSearch(req, res){
 function detailView(req, res){
   const SQL = `SELECT * FROM books WHERE id=$1;`;
   let values = [req.params.id];
-  console.log(req)
+  console.log(req.params.id)
   //get bookshelves.then
   client.query(SQL, values)
     .then(data => {
@@ -79,6 +80,28 @@ function search(req, res){
       let values = books[0];
       return client.query(SQL, [values.title, values.author, values.descript, values.image_url, values.isbn, values.bookshelf]);
     }).catch(err => {
+      res.render('pages/error', {err});
+    });
+}
+
+function addBook(req, res){
+  //takes in info from form
+  let addedBook = req.body.add;
+  console.log(addedBook)
+
+  //adds to SQL
+  let SQL = `INSERT INTO books 
+            (title, author, descript, image_url, isbn, bookshelf)
+            VALUES ($1, $2, $3, $4, $5, $6)`;
+  
+  let values = [addedBook.title, addedBook.author, addedBook.descript, addedBook.image_url, addedBook.isbn, addedBook.bookshelf];
+  
+  //redirects / renders the detail view of the book just added
+  return client.query(SQL, values)
+    .then(data => {
+      res.render('pages/books/show', {book: data.rows[0]});
+    }).catch(err => {
+      console.log(err);
       res.render('pages/error', {err});
     });
 }
