@@ -2,8 +2,16 @@
 <div id="form-popup" class="id<%= i %>">
     <h5>Want to add to your database? <a href="#" id="close">[close window]</a></h5>
     <form action="/books" method="post">
-        <%- include('../pages/books/detail.ejs', {book: book}) %>
-        <input id="searchBar" type="text" name="search" placeholder="Bookshelf Category" required>
+        <input id="searchBar" type="text" name="add" value="<%= book.title %>" required>
+        <label>Title</label>
+        <input id="searchBar" type="text" name="add" value="<%= book.author %>" required>
+        <label>Author</label>
+        <input id="searchBar" type="text" name="add" value="<%= book.isbn %>" required>
+        <label>ISBN</label>
+        <input id="searchBar" type="text" name="add" value="<%= book.image_url %>" required>
+        <label>Image URL</label>
+        <input id="searchBar" type="text" name="add" placeholder="Bookshelf Category" required>
+        <label>Bookshelf Category</label>
         <button type="submit">Add to Database</button>
     </form>
 </div>

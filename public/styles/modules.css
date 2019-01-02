@@ -10,6 +10,8 @@
     list-style: none;
     background-color: darkgray;
     margin: 20px;
+    display: flex;
+    flex-direction: column;
     padding: 10px;
     width: 250px;
     border-radius: 10px;
@@ -19,10 +21,13 @@
     width: 230px;
     height: 300px;
   }
+  li button{
+    align-self: flex-end !important;
+  }
   p{
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: 200px;
+    height: 150px;
     margin-top: 20px;
   }
 }
@@ -37,6 +42,7 @@
   li{
     text-align: center;
     list-style: none;
+    display: flex;
     background-color: darkgray;
     margin: 10px;
     padding: 10px;
