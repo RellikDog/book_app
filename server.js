@@ -24,6 +24,7 @@ app.get('/', home);
 app.get('/new', newSearch);
 app.get('/books/:id', detailView);
 
+// app.post('/books', bookToDB);
 app.post('/searches', search);
 
 //function calls
@@ -47,7 +48,7 @@ function newSearch(req, res){
 function detailView(req, res){
   const SQL = `SELECT * FROM books WHERE id=$1;`;
   let values = [req.params.id];
-  console.log(req)
+  // console.log(req)
   //get bookshelves.then
   client.query(SQL, values)
     .then(data => {
@@ -69,9 +70,8 @@ function search(req, res){
   return superagent.get(url)
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
-      console.log(books[0]);
+      // console.log(books[0]);
       res.render('pages/searches/show', {books});
-
       //placeholder values for feature 01 book setup
       let SQL = `INSERT INTO books 
             (title, author, descript, image_url, isbn, bookshelf)
@@ -82,6 +82,18 @@ function search(req, res){
       res.render('pages/error', {err});
     });
 }
+//==================================================================
+//book to DB
+// function bookToDB(){
+//   let SQL = `INSERT INTO books 
+//             (title, author, descript, image_url, isbn, bookshelf)
+//             VALUES ($1, $2, $3, $4, $5, $6)`;
+//       let values = ;
+//       return client.query(SQL, [values.title, values.author, values.descript, values.image_url, values.isbn, values.bookshelf]);
+// }
+
+
+
 
 //Constructor Functions
 function DBBook(book){ //constructor for book from database
@@ -91,7 +103,7 @@ function DBBook(book){ //constructor for book from database
   this.image_url = book.image_url;
   this.isbn = book.isbn;
   this.bookshelf = book.bookshelf;
-  this.id = book.id;
+  this.id = book.isbn;
 }
 
 function Book(book, bookshelf){ //constructor for book from API
@@ -101,6 +113,7 @@ function Book(book, bookshelf){ //constructor for book from API
   this.image_url = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
   this.isbn = book.volumeInfo.industryIdentifiers[0].type + ' ' + book.volumeInfo.industryIdentifiers[0].identifier;
   this.bookshelf = bookshelf;
+  this.id = this.isbn;
 }
 
 

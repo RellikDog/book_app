@@ -2,12 +2,24 @@
 
 $(document).ready(function() {
   console.log('toggle boi');
-  $('button').click((e) => {  
+  $('button').click((e) => {
     let idClicked = '.' + e.target.id;
-    console.log(idClicked + ' toggle on')
+    // console.log(idClicked + ' toggle on')
     $(idClicked).toggle();
     $('a[id="close"]').click(() => {
-      console.log(idClicked + ' toggle off')
+      // console.log(idClicked + ' toggle off')
+      $(idClicked).hide();
+    });
+  });
+});
+
+$(document).ready(function() {
+  console.log('toggle gurl');
+  $('button').click((event) => {
+    let idClicked = event.target.id;
+    $(idClicked).toggle();
+    $('a[id="close"]').click(() => {
+      // console.log(idClicked + ' toggle off')
       $(idClicked).hide();
     });
   });
