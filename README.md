@@ -61,17 +61,17 @@ NodeJS, EJS
 
 <b>Feature 04: Saving a new book to the collection</b>
 - Estimated time needed to complete: 1 hour
-- Start & Finish Time: 
-- Actual time needed to complete: 
+- Start & Finish Time: ?
+- Actual time needed to complete: 3 hours
 
 <b>Feature 05: Consistent Rendering</b>
 - Estimated time needed to complete: 1 hour
-- Start & Finish Time: 
-- Actual time needed to complete: 
+- Start & Finish Time: ?
+- Actual time needed to complete: 1 hour
 
 <b>Feature 06: Continue to style the application</b>
 - Estimated time needed to complete: 1 hour
-- Start & Finish Time: 
-- Actual time needed to complete: 
+- Start & Finish Time: ?
+- Actual time needed to complete: 1 hour
 
 ## Credits and Collaborations
