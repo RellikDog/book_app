@@ -45,6 +45,31 @@ function newSearch(req, res){
   res.render('pages/searches/new');
 }
 
+function search(req, res){
+  const searchStr = req.body.search[0];
+  const searchType = req.body.search[1];
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+
+  if (searchType === 'title') url+= `+intitle:${searchStr}`;
+  else if (searchType === 'author') url+= `+inauthor:$${searchStr}`;
+
+  return superagent.get(url)
+    .then(result => {
+      let books = result.body.items.map(book => new Book(book));
+      // console.log(books[0]);
+      res.render('pages/searches/show', {books});
+
+      //placeholder values for feature 01 book setup
+      // let SQL = `INSERT INTO books 
+      //       (title, author, descript, image_url, isbn, bookshelf)
+      //       VALUES ($1, $2, $3, $4, $5, $6)`;
+      // let values = books[0];
+      // return client.query(SQL, [values.title, values.author, values.descript, values.image_url, values.isbn, values.bookshelf]);
+    }).catch(err => {
+      res.render('pages/error', {err});
+    });
+}
+
 function detailView(req, res){
   const SQL = `SELECT * FROM books WHERE id=$1;`;
   let values = [req.params.id];
@@ -59,48 +84,22 @@ function detailView(req, res){
     });
 }
 
-function search(req, res){
-  const searchStr = req.body.search[0];
-  const searchType = req.body.search[1];
-  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-
-  if (searchType === 'title') url+= `+intitle:${searchStr}`;
-  else if (searchType === 'author') url+= `+inauthor:$${searchStr}`;
-
-  return superagent.get(url)
-    .then(result => {
-      let books = result.body.items.map(book => new Book(book));
-      console.log(books[0]);
-      res.render('pages/searches/show', {books});
-
-      //placeholder values for feature 01 book setup
-      let SQL = `INSERT INTO books 
-            (title, author, descript, image_url, isbn, bookshelf)
-            VALUES ($1, $2, $3, $4, $5, $6)`;
-      let values = books[0];
-      return client.query(SQL, [values.title, values.author, values.descript, values.image_url, values.isbn, values.bookshelf]);
-    }).catch(err => {
-      res.render('pages/error', {err});
-    });
-}
-
 function addBook(req, res){
-  //takes in info from form
-  let addedBook = req.body.add;
-  console.log(addedBook)
+  //takes in info from form and creates new object
+  console.log(req.body)
+  let addedBook = new DBBook(req.body);
+  let books = Object.values(addedBook);
+  books.pop();
 
   //adds to SQL
   let SQL = `INSERT INTO books 
             (title, author, descript, image_url, isbn, bookshelf)
             VALUES ($1, $2, $3, $4, $5, $6)`;
-  
-  let values = [addedBook.title, addedBook.author, addedBook.descript, addedBook.image_url, addedBook.isbn, addedBook.bookshelf];
-  
-  //redirects / renders the detail view of the book just added
-  return client.query(SQL, values)
-    .then(data => {
-      res.render('pages/books/show', {book: data.rows[0]});
-    }).catch(err => {
+
+  // redirects / renders the detail view of the book just added
+  return client.query(SQL, books)
+    .then(() => res.redirect('/'))
+    .catch(err => {
       console.log(err);
       res.render('pages/error', {err});
     });
