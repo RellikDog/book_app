@@ -1,3 +1,23 @@
+p{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 150px;
+  margin-top: 20px;
+  text-align: left;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  padding: 5px 0 5px 5px;
+  font-size: 10pt;
+}
+section li{
+  list-style: none;
+  background-color: white;
+}
+section li a{
+  background-color: #555;
+  padding: 2px;
+}
+
 @media only screen and (min-width: 960px) {
   section{
     width: 960px;
@@ -7,8 +27,6 @@
     justify-content: center;
   }
   li{
-    list-style: none;
-    background-color: darkgray;
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -24,12 +42,6 @@
   li button{
     align-self: flex-end !important;
   }
-  p{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 150px;
-    margin-top: 20px;
-  }
 }
 
 @media only screen and (max-width: 959px) {
@@ -41,9 +53,7 @@
   }
   li{
     text-align: center;
-    list-style: none;
     display: flex;
-    background-color: darkgray;
     margin: 10px;
     padding: 10px;
     width: 400px;
@@ -53,13 +63,6 @@
     object-fit: cover;
     width: 300px;
     height: 450px;
-  }
-  p{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    max-height: 150px;
-    margin-top: 20px;
-    text-align: left;
   }
 }
 
@@ -80,15 +83,28 @@ li button:hover{
   justify-content: center;
 }
 
+/*detail view*/
+figure{
+  background-color: darkgray;
+  border-radius: 10px;
+  padding: 10px;
+}
+figure img{
+  float: left;
+  width: 200px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
 /*Scrollbar styling from w3schools*/
 p::-webkit-scrollbar {
   width: 10px;
 }
 p::-webkit-scrollbar-track {
-  background:darkgray; 
+  background:#f1f1f1; 
 }
 p::-webkit-scrollbar-thumb {
-  background: #f1f1f1; 
+  background: darkgray; 
 }
 p::-webkit-scrollbar-thumb:hover {
   background: #555; 

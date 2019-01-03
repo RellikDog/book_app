@@ -38,6 +38,7 @@ h3{
   font-family: Staatliches, sans-serif;
   font-size: 16pt;
   font-weight: normal;
+  margin-top: 10px;
 }
 h5{
   font-style: italic;
@@ -45,14 +46,20 @@ h5{
 h5 a{
   color: lightgray;
 }
+h6{
+  margin: 5px 0;
+  font-size: 10pt;
+}
 a{
   font-family: Staatliches, sans-serif;
   font-size: 14pt;
   font-weight: normal;
   text-decoration: none;
-  color: white
+  color: white;
+  transition: 0.3s;  
 }
 a:hover{
-  color: darkblue;
-  transition: 0.3s;
+  color: white;
+  text-decoration: underline;
+  
 }
