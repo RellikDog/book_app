@@ -6,10 +6,13 @@
     <main>
         <h3>My bookshelf</h3>
         <section>
+            <% if (!books) { %>
+                <h2>No books in your library :(</h2>
+            <% }; %>
             <% books.forEach(book => { %>
                 <li>
                     <%- include('./books/detail.ejs', {book: book}) %>
-
+                    
                     <a href="/books/<%= book.id %>">>> View Details</a>
                 </li>
             

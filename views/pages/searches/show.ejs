@@ -6,14 +6,20 @@
     <main>
         <h3>search results</h3>
         <section>
-            <% for (var i in books) { %>
+            <% books.forEach(book => { %>
                 <li>
-                    <%- include('../books/detail.ejs', {book: books[i]}) %>
-                    <button type="button" id="id<%= i %>">add to db</button>
+                    <%- include('../books/detail.ejs', {book: book}) %>
+                    <form action="/books" method="POST">
+                        <input type="hidden" value="<%= book.title %>" name="title">
+                        <input type="hidden" value="<%= book.author %>" name="author">
+                        <input type="hidden" value="<%= book.isbn %>" name="isbn">
+                        <input type="hidden" value="<%= book.image_url %>" name="image_url">
+                        <input type="hidden" value="<%= book.descript %>" name="descript">
+                        <input type="text" placeholder="Bookshelf Category" name="bookshelf" required>
+                        <input type="submit" value="Add to Bookshelf">
+                    </form>
                 </li>
-
-                <%- include('../../layout/add.ejs', {book: books[i], i: i}) %>
-            <% }; %>
+            <% }); %>
         </section>
     </main>
 
