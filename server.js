@@ -22,7 +22,7 @@ client.on('error', err => console.error(err));
 //app get
 app.get('/', home);
 app.get('/new', newSearch);
-app.get('/books/:id', detailView);
+app.get('/books/:id', getBook);
 
 app.post('/searches', search);
 app.post('/books', addBook)
@@ -56,7 +56,6 @@ function search(req, res){
   return superagent.get(url)
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
-      // console.log(books[0]);
       res.render('pages/searches/show', {books});
 
       //placeholder values for feature 01 book setup
@@ -70,11 +69,14 @@ function search(req, res){
     });
 }
 
-function detailView(req, res){
+function getBook(req, res){
   const SQL = `SELECT * FROM books WHERE id=$1;`;
   let values = [req.params.id];
-  console.log(req.params.id)
-  //get bookshelves.then
+
+  detailView(SQL, values, res);
+}
+
+function detailView(SQL, values, res){
   client.query(SQL, values)
     .then(data => {
       res.render('pages/books/show', {book: data.rows[0]});
@@ -86,7 +88,7 @@ function detailView(req, res){
 
 function addBook(req, res){
   //takes in info from form and creates new object
-  console.log(req.body)
+  // console.log(req.body)
   let addedBook = new DBBook(req.body);
   let books = Object.values(addedBook);
   books.pop();
@@ -94,11 +96,16 @@ function addBook(req, res){
   //adds to SQL
   let SQL = `INSERT INTO books 
             (title, author, descript, image_url, isbn, bookshelf)
-            VALUES ($1, $2, $3, $4, $5, $6)`;
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id`;
 
   // redirects / renders the detail view of the book just added
   return client.query(SQL, books)
-    .then(() => res.redirect('/'))
+    .then(data => {
+      const selection = `SELECT * FROM books WHERE id=$1;`
+      let values = [data.rows[0].id];
+      detailView(selection, values, res);
+    })
     .catch(err => {
       console.log(err);
       res.render('pages/error', {err});

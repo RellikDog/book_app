@@ -2,15 +2,11 @@
 <html lang="en">
 <%- include('../../layout/head.ejs') %>
 <body>
-    <header>
-        <h1>[ book app ]</h1>
-    </header>
+    <%- include('../../layout/header.ejs') %>
     <main>
-        <h3>search results</h3>
+        <h3>detail view</h3>
         <section>
-            <li>
-                <%- include('./detail.ejs', {book: book}) %>
-            </li>
+            <%- include('./detail.ejs', {book: book}) %>
         </section>
     </main>
 </body>
