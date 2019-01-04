@@ -5,11 +5,19 @@
 const express = require('express');
 const pg = require('pg');
 const superagent = require('superagent');
+const methodOverride = require('method-override');
 require('dotenv').config();
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public')); //to allow for CSS to work correctly; from stack overflow
 
+app.use(methodOverride((req, res)=> {
+  if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    let method = req.body['_method'];
+    delete req.body['_method'];
+    return method;
+  }
+}));
 app.set('view engine', 'ejs');
 
 const PORT = process.env.PORT || 3000;
@@ -27,6 +35,16 @@ app.get('/books/:id', getBook);
 app.post('/searches', search);
 app.post('/books', addBook)
 
+app.delete('/books/:id', removeBook);
+
+
+function removeBook(req, res){
+  console.log(req.params.id);
+  client.query('DELETE FROM books WHERE id=$1', [req.params.id])
+    .then(result => {
+      res.redirect('/');
+    });
+}
 //function calls
 function home(req, res){
   const SQL = 'SELECT * FROM books';
@@ -59,7 +77,7 @@ function search(req, res){
       res.render('pages/searches/show', {books});
 
       //placeholder values for feature 01 book setup
-      // let SQL = `INSERT INTO books 
+      // let SQL = `INSERT INTO books
       //       (title, author, descript, image_url, isbn, bookshelf)
       //       VALUES ($1, $2, $3, $4, $5, $6)`;
       // let values = books[0];
