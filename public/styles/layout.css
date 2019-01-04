@@ -21,3 +21,6 @@ nav li{
     background-color: none;
 }
   
+.hide-form{
+    display: none;
+}
