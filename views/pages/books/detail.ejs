@@ -1,8 +1,9 @@
 <img src=<%= book.image_url %>>
-<h3><%= book.title %></h3>
-<h5><%= book.author %></h5>
+<h3><%= book.title %></h3> <h5><%= book.author %></h5>
 <% if (book.descript) {%>
     <p><%= book.descript %></p>
+<% } else { %>
+    <p>No description provided</p>
 <% } %>
 <h6>ISBN: <%= book.isbn %></h6>
 <h6>Bookshelf: <%= book.bookshelf %></h6>
