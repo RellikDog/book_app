@@ -13,14 +13,15 @@
                     <input type="submit" value="delete me">
                 </form>
                 <button class="show-form">Modify Details</button> 
-                <form class="hide-form" action="/books" method="POST">
+                <form class="hide-form" action="/books/<%= book.id %>" method="POST">
+                    <input type="hidden" name="_method" value="PUT">
                     <input type="text" value="<%= book.title %>" name="title">
                     <input type="text" value="<%= book.author %>" name="author">
                     <input type="text" value="<%= book.isbn %>" name="isbn">
                     <input type="text" value="<%= book.image_url %>" name="image_url">
                     <input type="text" value="<%= book.descript %>" name="descript">
                     <input type="text" placeholder="Bookshelf Category" name="bookshelf" required>
-                    <input id="add-butt" type="submit" value="Add to Bookshelf">
+                    <input id="add-butt" type="submit" value="Save Changes">
                 </form>
             </figure>
         </section>

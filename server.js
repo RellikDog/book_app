@@ -13,6 +13,7 @@ app.use(express.static(__dirname + '/public')); //to allow for CSS to work corre
 
 app.use(methodOverride((req, res)=> {
   if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    console.log('INSIDE METHOD OVERRIDE');
     let method = req.body['_method'];
     delete req.body['_method'];
     return method;
@@ -36,7 +37,28 @@ app.post('/searches', search);
 app.post('/books', addBook)
 
 app.delete('/books/:id', removeBook);
+app.put('/books/:id', updateBook);
 
+function updateBook(req, res){
+  const SQL = `UPDATE books
+              SET (title=$2, author=$3, descript=$4, isbn=$5, image_URL=$6, bookshelf=$7)
+              WHERE id=$1
+              RETURNING id`;
+
+  let values = [req.params.id, req.body];
+  console.log(values);
+  
+  client.query(SQL, values)
+    .then(data => {
+      console.log(data.rows[0]);
+      const selection = `SELECT * FROM books WHERE id=$1;`
+      let values = [data.rows[0].id];
+      detailView(selection, values, res);
+    })
+    .catch(err => {
+      res.render('pages/error', {err});
+    });
+}
 
 function removeBook(req, res){
   console.log(req.params.id);
@@ -109,7 +131,9 @@ function addBook(req, res){
   // console.log(req.body)
   let addedBook = new DBBook(req.body);
   let books = Object.values(addedBook);
+  console.log(books);
   books.pop();
+  console.log(books);
 
   //adds to SQL
   let SQL = `INSERT INTO books 
