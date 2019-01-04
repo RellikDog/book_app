@@ -37,8 +37,10 @@ h1{
 h3{
   font-family: Staatliches, sans-serif;
   font-size: 16pt;
+  text-align: left;
   font-weight: normal;
   margin-top: 10px;
+  margin-left: 20px;
 }
 h5{
   font-style: italic;

@@ -11,14 +11,13 @@
                 <li>
                     <%- include('./books/detail.ejs', {book: book}) %>
                     
-                    <a href="/books/<%= book.id %>">>> View Details</a>
+                    <button onclick="location.href='/books/<%= book.id %>'">>> View Details</button>
                 </li>
             
             <% }); %>
 
-            <h4>Search and explore new books to add to your library!</h4>
         </section>
-        
+        <h4>Search and explore new books to add to your library!</h4>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </body>

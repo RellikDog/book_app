@@ -1,7 +1,7 @@
 p{
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 150px;
+  height: 150px;
   margin-top: 20px;
   text-align: left;
   border: 1px solid lightgray;
@@ -12,10 +12,31 @@ p{
 section li{
   list-style: none;
   background-color: white;
+  transition: 0.3s;
+}
+section li:hover{
+  box-shadow: 0px 0px 15px #888888;
 }
 section li a{
   background-color: #555;
   padding: 2px;
+}
+
+form input[type="text"]{
+  width: 99%;
+  margin-top: 2px;
+  padding: 5px;
+}
+
+li button, #add-butt{
+  margin-top: 5px;
+  width: 99%;
+  border: 0;
+  border-radius: 3px;
+}
+li button:hover, #add-butt:hover{
+  background-color: #276bd8;
+  transition: 0.3s;
 }
 
 @media only screen and (min-width: 960px) {
@@ -39,44 +60,39 @@ section li a{
     width: 230px;
     height: 300px;
   }
-  li button{
-    align-self: flex-end !important;
+  figure img{
+    float: left;
+    width: 200px;
+    object-fit: cover;
+    margin-right: 20px;
   }
 }
 
 @media only screen and (max-width: 959px) {
+  *{
+    box-sizing: border-box;
+  }
   section{
-    width: 100%;
+    width: 370px;
+    margin: 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
   }
   li{
     text-align: center;
-    display: flex;
     margin: 10px;
     padding: 10px;
-    width: 400px;
+    width: 90%;
     border-radius: 10px;
   }
   li img{
     object-fit: cover;
-    width: 300px;
-    height: 450px;
+    width: 50%;
   }
 }
 
-li button{
-  margin-top: 5px;
-  width: 99%;
-  align-self: flex-end;
-  border: 0;
-  border-radius: 3px;
-}
-li button:hover{
-  background-color: #276bd8;
-  transition: 0.3s;
-}
+
 
 .search{
   display: flex;
@@ -85,15 +101,12 @@ li button:hover{
 
 /*detail view*/
 figure{
-  background-color: darkgray;
+  background-color: white;
   border-radius: 10px;
   padding: 10px;
 }
-figure img{
-  float: left;
-  width: 200px;
-  object-fit: cover;
-  margin-right: 20px;
+figure p{
+  background-color: rgba(211, 211, 211, 0.37);
 }
 
 /*Scrollbar styling from w3schools*/
@@ -127,7 +140,7 @@ p::-webkit-scrollbar-thumb:hover {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-button{
+button, #add-butt{
   background-color: black;
   color: white;
 }
@@ -153,7 +166,4 @@ button{
   background-color: white;
   border: 3px solid #f1f1f1;
   z-index: 9;
-}
-.id1, .id2, .id3, .id4, .id5, .id6, .id7, .id8, .id9, .id0{
-  display: none;
 }

@@ -9,7 +9,7 @@
             <% books.forEach(book => { %>
                 <li>
                     <%- include('../books/detail.ejs', {book: book}) %>
-                    <button class="show-form">Modify Details</button> 
+                    <button class="show-form">Modify / Add to Bookshelf</button> 
                     <form class="hide-form" action="/books" method="POST">
                         <input type="text" value="<%= book.title %>" name="title">
                         <input type="text" value="<%= book.author %>" name="author">
