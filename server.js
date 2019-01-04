@@ -39,7 +39,7 @@ app.delete('/books/:id', removeBook);
 
 
 function removeBook(req, res){
-  console.log('deleted');
+  console.log(req.params.id);
   client.query('DELETE FROM books WHERE id=$1', [req.params.id])
     .then(result => {
       res.redirect('/');

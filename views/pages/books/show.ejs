@@ -8,7 +8,7 @@
         <section>
             <figure>
                 <%- include('./detail.ejs', {book: book}) %>
-                <form action="/books/<% book.id %>" method="POST">
+                <form action="/books/<%= book.id %>" method="POST">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="submit" value="delete me">
                 </form>
