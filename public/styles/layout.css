@@ -1,10 +1,26 @@
+@media only screen and (min-width: 960px) {
+    main{
+        width: 960px;
+        margin: 20px auto;
+    }
+  }
+@media only screen and (max-width: 959px) {
+    main{
+        width: 480px;
+        padding: 20px;
+    }
+    header, nav{
+        width: 480px !important;
+    }
+}
 header{
     background-color: black;
     color: white;
     padding: 10px;
     text-align: center;
-    width: 100% !important;
 }
+
+
 
 nav{
     width: 100%;
