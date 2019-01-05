@@ -6,12 +6,15 @@ const express = require('express');
 const pg = require('pg');
 const superagent = require('superagent');
 const methodOverride = require('method-override');
-require('dotenv').config();
 const app = express();
+const PORT = process.env.PORT || 3000;
+require('dotenv').config();
+
+app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public')); //to allow for CSS to work correctly; from stack overflow
 
-app.use(methodOverride((req, res)=> {
+app.use(methodOverride((req, res) => {
   if(req.body && typeof req.body === 'object' && '_method' in req.body){
     console.log('INSIDE METHOD OVERRIDE');
     let method = req.body['_method'];
@@ -19,59 +22,27 @@ app.use(methodOverride((req, res)=> {
     return method;
   }
 }));
-app.set('view engine', 'ejs');
 
-const PORT = process.env.PORT || 3000;
+//Postgres setup
 
-//postgress setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
 //app get
+
 app.get('/', home);
 app.get('/new', newSearch);
 app.get('/books/:id', getBook);
-
 app.post('/searches', search);
 app.post('/books', addBook)
 app.delete('/books/:id', removeBook);
 app.put('/books/:id', updateBook);
 
-function updateBook(req, res){
-  console.log('updating book ' + req.params.id);
-  const SQL = `UPDATE books
-              SET (title=$1, author=$2, descript=$3, isbn=$4, image_url=$5, bookshelf=$6)
-              WHERE id=$7
-              RETURNING id`;
+//Function Calls
 
-  let values = [req.body.title, req.body.author, req.body.descript, req.body.isbn, req.body.image_url, req.body.bookshelf, req.params.id];
-  console.log(values);
-
-  client.query(SQL, values)
-    .then(data => {
-      console.log(data.rows[0]);
-      const selection = `SELECT * FROM books WHERE id=$7;`;
-      let values = [data.rows[0].id];
-      detailView(selection, values, res);
-    })
-    .catch(err => {
-      console.log(err);
-      res.render('pages/error', {err});
-    });
-}
-
-function removeBook(req, res){
-  console.log(req.params.id);
-  client.query('DELETE FROM books WHERE id=$1', [req.params.id])
-    .then(() => {
-      res.redirect('/');
-    });
-}
-//function calls
 function home(req, res){
   const SQL = 'SELECT * FROM books';
-
   return client.query(SQL)
     .then(data => {
       let books = data.rows.map(book => new DBBook(book));
@@ -98,13 +69,6 @@ function search(req, res){
     .then(result => {
       let books = result.body.items.map(book => new Book(book));
       res.render('pages/searches/show', {books});
-
-      //placeholder values for feature 01 book setup
-      // let SQL = `INSERT INTO books
-      //       (title, author, descript, image_url, isbn, bookshelf)
-      //       VALUES ($1, $2, $3, $4, $5, $6)`;
-      // let values = books[0];
-      // return client.query(SQL, [values.title, values.author, values.descript, values.image_url, values.isbn, values.bookshelf]);
     }).catch(err => {
       res.render('pages/error', {err});
     });
@@ -118,7 +82,7 @@ function getBook(req, res){
 }
 
 function detailView(SQL, values, res){
-  console.log('populating bookshelves');
+  console.log('** POPULATING BOOKSHELVES');
   //populate dropdown with all current bookshelves from SQL
   let shelfSQL = 'SELECT DISTINCT bookshelf FROM books;';
   let bookshelves = [];
@@ -133,7 +97,7 @@ function detailView(SQL, values, res){
 
   return client.query(SQL, values)
     .then(data => {
-      res.render('pages/books/show', {book: data.rows[0], bookshelves: bookshelves.bookshelf});
+      res.render('pages/books/show', {book: data.rows[0], bookshelves: bookshelves});
     }).catch(err => {
       console.log(err);
       res.render('pages/error', {err});
@@ -142,12 +106,9 @@ function detailView(SQL, values, res){
 
 function addBook(req, res){
   //takes in info from form and creates new object
-  // console.log(req.body)
   let addedBook = new DBBook(req.body);
   let books = Object.values(addedBook);
-  console.log(books);
   books.pop();
-  console.log(books);
 
   //adds to SQL
   let SQL = `INSERT INTO books 
@@ -166,6 +127,30 @@ function addBook(req, res){
       console.log(err);
       res.render('pages/error', {err});
     });
+}
+
+function updateBook(req, res){
+  console.log('** updating book ' + req.params.id);
+  const SQL = `UPDATE books
+              SET title=$1, author=$2, descript=$3, isbn=$4, image_url=$5, bookshelf=$6
+              WHERE id=$7`;
+
+  let values = [req.body.title, req.body.author, req.body.descript, req.body.isbn, req.body.image_url, req.body.bookshelf, req.params.id];
+
+  client.query(SQL, values)
+    .then(data => {
+      res.redirect(`/books/${req.params.id}`);
+    })
+    .catch(err => {
+      console.log(err);
+      res.render('pages/error', {err});
+    });
+}
+
+function removeBook(req, res){
+  console.log(req.params.id);
+  client.query('DELETE FROM books WHERE id=$1', [req.params.id])
+    .then(() => res.redirect('/'));
 }
 
 //Constructor Functions
@@ -187,6 +172,5 @@ function Book(book, bookshelf){ //constructor for book from API
   this.isbn = book.volumeInfo.industryIdentifiers[0].type + ' ' + book.volumeInfo.industryIdentifiers[0].identifier;
   this.bookshelf = bookshelf;
 }
-
 
 app.listen(PORT, () => console.log(`APP is up on PORT : ${PORT}`));

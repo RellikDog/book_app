@@ -23,9 +23,32 @@ section li a{
 }
 
 form input[type="text"]{
+  font-family: Quicksand, sans-serif;
   width: 99%;
-  margin-top: 2px;
+  margin-bottom: 15px;
   padding: 5px;
+}
+#update, input[type="submit"]{
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  border: 0;
+  padding: 5px;
+  font-family: Quicksand, sans-serif;
+  float: right;
+  opacity: 0.7;
+}
+#delete{
+  background-color: crimson !important;
+  float: right;
+  margin: 0 5px;
+}
+#update:hover, #delete:hover{
+  opacity: 1;
+  transition: 0.3s;
+}
+label{
+  font-size: 10pt;
 }
 
 li button, #add-butt{
