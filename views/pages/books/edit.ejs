@@ -15,23 +15,12 @@
                 <button class="show-form">Modify Details</button> 
                 <form class="hide-form" action="/books/<%= book.id %>" method="POST">
                     <input type="hidden" name="_method" value="PUT">
-                    <label for="title">Title</label>
                     <input type="text" value="<%= book.title %>" name="title">
-                    <label for="author">Author</label>
                     <input type="text" value="<%= book.author %>" name="author">
-                    <label for="ISBN">ISBN</label>
                     <input type="text" value="<%= book.isbn %>" name="isbn">
-                    <label for="image_url">Image URL</label>
                     <input type="text" value="<%= book.image_url %>" name="image_url">
-                    <label for="descript">Book Description</label>
                     <input type="text" value="<%= book.descript %>" name="descript">
-                    <label for="bookshelf">Bookshelf</label><br>
-                    <select name="bookshelf">
-                        <option value="<%= book.bookshelf %>" selected="selected"><%= book.bookshelf %></option>
-                        <% bookshelves.forEach(shelf => { %>
-                            <option value="<%= shelf %>"><%= shelf.bookshelf %></option>
-                        <% }); %>
-                    </select>
+                    <input type="text" placeholder="Bookshelf Category" name="bookshelf" required>
                     <input id="add-butt" type="submit" value="Save Changes">
                 </form>
             </figure>

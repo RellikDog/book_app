@@ -35,27 +35,28 @@ app.get('/books/:id', getBook);
 
 app.post('/searches', search);
 app.post('/books', addBook)
-
 app.delete('/books/:id', removeBook);
 app.put('/books/:id', updateBook);
 
 function updateBook(req, res){
+  console.log('updating book ' + req.params.id);
   const SQL = `UPDATE books
-              SET (title=$2, author=$3, descript=$4, isbn=$5, image_URL=$6, bookshelf=$7)
-              WHERE id=$1
+              SET (title=$1, author=$2, descript=$3, isbn=$4, image_url=$5, bookshelf=$6)
+              WHERE id=$7
               RETURNING id`;
 
-  let values = [req.params.id, req.body];
+  let values = [req.body.title, req.body.author, req.body.descript, req.body.isbn, req.body.image_url, req.body.bookshelf, req.params.id];
   console.log(values);
-  
+
   client.query(SQL, values)
     .then(data => {
       console.log(data.rows[0]);
-      const selection = `SELECT * FROM books WHERE id=$1;`
+      const selection = `SELECT * FROM books WHERE id=$7;`;
       let values = [data.rows[0].id];
       detailView(selection, values, res);
     })
     .catch(err => {
+      console.log(err);
       res.render('pages/error', {err});
     });
 }
@@ -63,7 +64,7 @@ function updateBook(req, res){
 function removeBook(req, res){
   console.log(req.params.id);
   client.query('DELETE FROM books WHERE id=$1', [req.params.id])
-    .then(result => {
+    .then(() => {
       res.redirect('/');
     });
 }
@@ -117,9 +118,22 @@ function getBook(req, res){
 }
 
 function detailView(SQL, values, res){
-  client.query(SQL, values)
+  console.log('populating bookshelves');
+  //populate dropdown with all current bookshelves from SQL
+  let shelfSQL = 'SELECT DISTINCT bookshelf FROM books;';
+  let bookshelves = [];
+
+  client.query(shelfSQL)
     .then(data => {
-      res.render('pages/books/show', {book: data.rows[0]});
+      console.log(data.rows);
+      bookshelves = [...data.rows];
+    }).catch(err => {
+      console.log(err);
+    });
+
+  return client.query(SQL, values)
+    .then(data => {
+      res.render('pages/books/show', {book: data.rows[0], bookshelves: bookshelves.bookshelf});
     }).catch(err => {
       console.log(err);
       res.render('pages/error', {err});
