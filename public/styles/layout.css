@@ -20,8 +20,6 @@ header{
     text-align: center;
 }
 
-
-
 nav{
     width: 100%;
     background-color: darkgray;
@@ -35,6 +33,13 @@ nav li{
     padding: 0 20px;;
     margin: 0;
     background-color: none;
+}
+fieldset{
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    padding: 20px;
+    margin-top: 10px;
+    display: block;
 }
   
 .hide-form{
